@@ -1,0 +1,20 @@
+{
+  "name": "progress-report",
+  "interface": {
+    "displayName": "progress-report"
+  },
+  "plugins": [
+    {
+      "name": "progress-report",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

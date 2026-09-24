@@ -1,0 +1,11 @@
+{
+  "name": "progress-report",
+  "version": "0.1.0",
+  "description": "Report current request progress with evidence-backed status and the next action.",
+  "author": {
+    "name": "insung",
+    "url": "https://github.com/insung"
+  },
+  "repository": "https://github.com/insung/progress-report",
+  "license": "MIT"
+}

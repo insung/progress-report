@@ -1,0 +1,15 @@
+{
+  "name": "progress-report",
+  "owner": {
+    "name": "insung",
+    "url": "https://github.com/insung"
+  },
+  "plugins": [
+    {
+      "name": "progress-report",
+      "source": ".",
+      "description": "Report current request progress with evidence-backed status and the next action."
+    }
+  ],
+  "description": "Install the progress-report skill as a Claude Code plugin."
+}

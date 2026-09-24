@@ -1,0 +1,18 @@
+{
+  "name": "progress-report",
+  "version": "0.1.0",
+  "description": "Report current request progress with evidence-backed status and the next action.",
+  "author": {
+    "name": "insung"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Progress Report",
+    "shortDescription": "Report current request progress with evidence-backed status and the next action.",
+    "longDescription": "Report current request progress with evidence-backed status and the next action.",
+    "developerName": "insung",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Use $progress-report to report the progress of the current request."
+  }
+}
