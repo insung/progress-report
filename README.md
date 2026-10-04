@@ -2,7 +2,7 @@
 
 [한국어](README.ko.md) · [MIT License](LICENSE)
 
-A skill for reporting the current request's goal and what is done, in progress, blocked, or still unplanned. It shows scope, goal, and progress in a summary table, followed by an evidence-backed task table with a concrete verification method for each step. Codex and Claude Code plugins read the same `skills/progress-report/` directory.
+A skill for reporting the current request's goal and what is done, in progress, blocked, or still unplanned. It shows scope and goal in a summary table, followed by an evidence-backed task table with a concrete verification method for each step. Codex and Claude Code plugins read the same `skills/progress-report/` directory.
 
 ## Why this exists
 
@@ -40,7 +40,7 @@ Start a new session if needed. Invoke `/progress-report:progress-report`.
 $progress-report Where are we on the public skill repository work?
 ```
 
-The default scope is the most recent major request and its follow-up changes. A summary table shows `범위` (scope), `목표` (intended outcome), and `진척` (overall progress). A task table then shows one row per step with `단계` (step), `할 일` (action), `검증 방법` (verification), and `상태` (status). If the work has phases, the task table follows those phases.
+The default scope is the most recent major request and its follow-up changes. A summary table shows `범위` (scope) and `목표` (intended outcome). A task table then shows one row per step with `단계` (step), `할 일` (action), `검증 방법` (verification), and `상태` (status). If the work has phases, the task table follows those phases.
 
 **Whole session**
 
@@ -54,15 +54,57 @@ The status vocabulary is fixed: `미착수` (not started), `계획 중` (plannin
 
 A useful report shows the goal and remaining actions without a narrative:
 
-| 범위 | 목표 | 진척 |
-| --- | --- | --- |
-| Public skill repository work | Complete a public repository with usage guides and validated installation | 3 steps; 1 in progress, 1 not started, 1 in review |
+| 범위 | 목표 |
+| --- | --- |
+| Public skill repository work | Complete a public repository with usage guides and validated installation |
 
 | 단계 | 할 일 | 검증 방법 | 상태 |
 | --- | --- | --- | --- |
 | 1 | Write the usage guide | Read both language versions and follow local links | 진행 중 |
 | 2 | Validate installation | Install from each host's marketplace in a clean profile | 미착수 |
 | 3 | Review the result | User checks the public repository URL | 검토 중 · 사용자 |
+
+**다음 작업:** Validate installation and incorporate the user's review.
+
+### Worktree and verification examples
+
+All projects, repository-relative paths, commands, and results below are fictional examples, not execution evidence. In actual reports, verify paths and branches with `git worktree list --porcelain` in each project.
+
+For one related worktree, insert this table between the summary and task tables:
+
+| 프로젝트 | 워크트리 경로 | 브랜치 | 용도 |
+| --- | --- | --- | --- |
+| auth-service | `.worktree/reset-api` | `feat/reset-api` | API implementation and self-checks |
+
+For several related worktrees, add rows to the same structure. Omit worktrees belonging to other requests.
+
+| 프로젝트 | 워크트리 경로 | 브랜치 | 용도 |
+| --- | --- | --- | --- |
+| auth-service | `.worktree/reset-api` | `feat/reset-api` | API implementation and self-checks |
+| auth-web | `.worktree/reset-form` | `feat/reset-form` | UI implementation and self-checks |
+
+When work is split across locations and row-to-location mapping is unclear, append `작업 위치` (work location) to the task table. Keep the default four columns when implementation and review purposes already make the mapping clear.
+
+| 단계 | 할 일 | 검증 방법 | 상태 | 작업 위치 |
+| --- | --- | --- | --- | --- |
+| 1 | Reject expired API tokens | `pnpm lint`, `pnpm typecheck`, `pnpm test -- token.test.ts` | 진행 중 · lint passed; others not run | auth-service / `.worktree/reset-api` |
+| 2 | Implement the email input form | `pnpm test -- form.test.ts`, user screen and wording review | 검토 중 · 사용자, automated tests: 6 passed | auth-web / `.worktree/reset-form` |
+
+If no related separate worktree exists, omit the worktree table. A primary checkout alone does not count as a separate working worktree. A failed query is not evidence of absence; do not invent paths or branches. Put an uncertainty note in the worktree section:
+
+**워크트리:** 미확인 · Repository access restriction prevented listing.
+
+Use actual commands confirmed in the project, including relevant lint, typecheck, and tests. For work without commands or requiring human judgment, specify who reviews which screen, wording, links, or procedure. Reporting does not automatically run checks.
+
+| Point in time | Verification | Status |
+| --- | --- | --- |
+| Implemented, checks not run | `pnpm lint`, `pnpm typecheck`, `pnpm test -- token.test.ts` | 진행 중 |
+| Only lint passed | Same three commands | 진행 중 · lint passed; typecheck and tests not run |
+| All specified checks passed | Same three commands | 완료 · lint and typecheck passed; tests: 5 passed |
+| Automated tests passed; required user review pending | `pnpm test -- form.test.ts`, user screen and wording review | 검토 중 · 사용자 |
+| Commands not confirmed | Confirm project check commands next | 계획 중 |
+
+Output order is summary → optional worktrees → tasks → optional pending decisions → `다음 작업` (next action). The [report template](skills/progress-report/templates/progress-report.md) defines structure; SKILL.md remains canonical for scope, status, and verification rules.
 
 ## Boundaries
 
