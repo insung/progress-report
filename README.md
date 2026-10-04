@@ -2,7 +2,7 @@
 
 [한국어](README.ko.md) · [MIT License](LICENSE)
 
-A skill for reporting what is done, in progress, blocked, or still unplanned in the current request. It produces an evidence-backed status table with a concrete verification method and next action for each step. Codex and Claude Code plugins read the same `skills/progress-report/` directory.
+A skill for reporting the current request's goal and what is done, in progress, blocked, or still unplanned. It shows scope, goal, and progress in a summary table, followed by an evidence-backed task table with a concrete verification method for each step. Codex and Claude Code plugins read the same `skills/progress-report/` directory.
 
 ## Why this exists
 
@@ -40,7 +40,7 @@ Start a new session if needed. Invoke `/progress-report:progress-report`.
 $progress-report Where are we on the public skill repository work?
 ```
 
-The default scope is the most recent major request and its follow-up changes. The answer starts with that scope, then shows one row per step with these columns: `단계` (step), `할 일` (action), `검증 방법` (verification), and `상태` (status). If the work has phases, the table follows those phases.
+The default scope is the most recent major request and its follow-up changes. A summary table shows `범위` (scope), `목표` (intended outcome), and `진척` (overall progress). A task table then shows one row per step with `단계` (step), `할 일` (action), `검증 방법` (verification), and `상태` (status). If the work has phases, the task table follows those phases.
 
 **Whole session**
 
@@ -48,11 +48,15 @@ The default scope is the most recent major request and its follow-up changes. Th
 $progress-report Show progress for this entire session, including earlier major requests.
 ```
 
-Explicitly saying “whole session” expands the scope to all major requests in the session. Naming a specific phase narrows the report to that phase.
+Explicitly saying “whole session” expands the scope to all major requests in the session, with a separate goal for each request. Naming a specific phase narrows the report to that phase and its goal.
 
 The status vocabulary is fixed: `미착수` (not started), `계획 중` (planning), `진행 중` (in progress), `검토 중` (review), `막힘` (blocked), `완료` (done), and `이번 범위에서 제외` (out of scope). “Done” requires evidence that the named verification actually passed. A changed file or planned test alone is not completion. Review states name who must review; blocked states name the obstacle; deferred work remains visible.
 
-A useful report lets the reader see the remaining action without decoding a narrative:
+A useful report shows the goal and remaining actions without a narrative:
+
+| 범위 | 목표 | 진척 |
+| --- | --- | --- |
+| Public skill repository work | Complete a public repository with usage guides and validated installation | 3 steps; 1 in progress, 1 not started, 1 in review |
 
 | 단계 | 할 일 | 검증 방법 | 상태 |
 | --- | --- | --- | --- |
