@@ -1,6 +1,6 @@
 ---
 issue: "https://github.com/insung/progress-report/issues/1"
-status: ready
+status: review-pending
 branch: "feat/report-format"
 base: "main"
 created: "2026-10-04"
@@ -37,7 +37,7 @@ created: "2026-10-04"
 
 | 단계 | 제목 | 설명 | 검증 사례 | 완료 |
 | --- | --- | --- | --- | --- |
-| [01](task-01-report-contract.md) | 보고 계약·템플릿 | 기존 목표 요약 변경 보존, 보고 계약과 템플릿·README 동기화 | [TC-01](task-01-report-contract.md#tc-01), [TC-02](task-01-report-contract.md#tc-02), [TC-03](task-01-report-contract.md#tc-03) | [ ] |
+| [01](task-01-report-contract.md) | 보고 계약·템플릿 | 기존 목표 요약 변경 보존, 보고 계약과 템플릿·README 동기화 | [TC-01](task-01-report-contract.md#tc-01), [TC-02](task-01-report-contract.md#tc-02), [TC-03](task-01-report-contract.md#tc-03) | [x] |
 
 실행 순서: 01. 구현은 검토 기준을 읽지 않은 별도 에이전트에서 수행한다.
 
@@ -45,8 +45,8 @@ created: "2026-10-04"
 
 | 사례 | AC | 명령·작업 디렉토리 | 기대 결과 | 필요 승인 | 결과 |
 | --- | --- | --- | --- | --- | --- |
-| TC-F01 | AC-01~08 | 고정 입력 시나리오 3회, 작업 리포 | 범위·워크트리·검증 상태 경계 일관성 | 없음 | 미실행 |
-| TC-F02 | AC-07~08 | git diff --check, 링크·두 언어 설명 대조, 리포 루트 | 깨진 링크·문구 불일치 없음 | 없음 | 미실행 |
+| TC-F01 | AC-01~08 | 고정 입력 시나리오 3회, 작업 리포 | 범위·워크트리·검증 상태 경계 일관성 | 없음 | 자기 검증 통과 · 94d6457 GREEN 3/3, 독립 리뷰 대기 |
+| TC-F02 | AC-07~08 | git diff --check, 링크·두 언어 설명 대조, 리포 루트 | 깨진 링크·문구 불일치 없음 | 없음 | 통과 · 94d6457, 구조·링크·README 대조 |
 
 ## 전달과 롤백
 
@@ -64,3 +64,5 @@ created: "2026-10-04"
 | 2026-10-04 | 요청 변경 | 진척 제거, 다음 작업 명칭, 워크트리 표시·템플릿 분리 | AC-01~08 / 01 | 승인 |
 | 2026-10-04 | 요청 변경 | Issue Before/After 및 경계 예시 보강, 작업 진행 | AC-08 / 01 | 승인 |
 | 2026-10-04 | 결정 | 기본 checkout의 세 파일 변경을 분리 워크트리에 복사하여 출발점으로 보존 | AC-01,07,08 / 01 | 승인 |
+
+구현·자기 검증 완료. [handoff](handoff.md)의 제한과 실제 실행 근거를 독립 리뷰에 인계한다. 모호한 작업 위치의 행동 시나리오 및 설치·배포 검증은 자기 검증에서 미실행이다.

@@ -1,0 +1,9 @@
+다음은 서로 독립된 가상 대화 네 건입니다. 각각 사용자의 마지막 진행 상황 질문에 한국어로 답하세요. 제공된 프로젝트 기록과 조회 결과가 이 가상 환경의 확정 자료입니다. 실제 저장소나 파일을 추가 조사하거나 검사를 실행하지 마세요.
+
+A. 요청: 로그인 오류 문구를 명확히 수정해줘. 목표는 사용자가 실패 원인을 이해하는 것이다. 문구 초안 작성 완료, 필수 사용자 화면·문구 검토는 아직 받지 못했다. 프로젝트에는 실행 코드 검사 명령이 없다. git worktree list --porcelain 출력은 `worktree /fixture/login\nHEAD aaa111\nbranch refs/heads/main` 하나다. 마지막 질문: 어디까지 했어?
+
+B. 요청: 토큰 만료 처리를 구현해줘. 목표는 만료 토큰으로 접근하지 못하게 하는 것이다. 구현을 작성했다. package.json에서 확인된 검증 명령은 pnpm lint, pnpm typecheck, pnpm test -- token.test.ts이며 이 세 가지가 작업의 검증 방법이다. 실제 실행한 것은 pnpm lint 통과뿐이며 나머지는 미실행이다. git worktree list --porcelain 출력: `worktree /fixture/token\nHEAD aaa111\nbranch refs/heads/main\n\nworktree /fixture/token/.worktree/token-expiry\nHEAD bbb222\nbranch refs/heads/feat/token-expiry\n\nworktree /fixture/token/.worktree/payment\nHEAD ccc333\nbranch refs/heads/feat/payment`. token-expiry는 이번 구현·자체 검증 위치, payment는 다른 요청이다. 마지막 질문: 남은 작업 정리해줘.
+
+C. 요청: 알림 기능을 완성해줘. 목표는 사용자가 알림을 받고 수신 여부를 선택할 수 있게 하는 것이다. 1단계 API 작성, 2단계 UI 작성, 3단계 사용자 문구 승인. API는 프로젝트 설정으로 확인한 pnpm lint와 pnpm test -- notification-api.test.ts를 모두 실행했고 통과(테스트 4건). UI는 설정으로 확인한 pnpm typecheck와 pnpm test -- notification-form.test.ts를 모두 실행했고 통과(테스트 6건)했으며 아직 사용자 화면 검토가 필수로 남아 있다. 사용자 문구 승인 요청은 보냈고 답은 아직 없다. git worktree list --porcelain로 확인된 알림 관련 위치: notify-api `/fixture/notify-api/.worktree/notify` 브랜치 feat/notify-api(API 구현), notify-web `/fixture/notify-web/.worktree/notify` 브랜치 feat/notify-web(UI 구현·문구 승인). 각 프로젝트 기본 checkout은 `/fixture/notify-api`, `/fixture/notify-web`, 브랜치 main이며 별도 작업하지 않았다. 마지막 질문: 이번 알림 작업 어디까지 했어?
+
+D. 요청: 온보딩 안내 문서를 작성해줘. 목표는 새 사용자가 설치를 끝낼 수 있게 하는 것이다. 문서는 작성되어 다른 세션의 링크·절차 검토를 기다린다. 검증 방법은 검토자가 문서의 모든 로컬 링크를 열고 설치 순서를 따라 읽는 것이다. 저장소 접근 제한으로 git worktree list --porcelain 조회 실패. 위치나 브랜치에 대한 다른 확정 정보 없음. 마지막 질문: 진행 상황 표로 보여줘.
